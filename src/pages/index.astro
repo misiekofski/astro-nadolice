@@ -3,48 +3,208 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import { getCollection } from 'astro:content';
+import FormattedDate from '../components/FormattedDate.astro';
+
+const posts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+).slice(0, 3);
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="pl">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 	</head>
 	<body>
 		<Header />
 		<main>
-			<h1>🧑‍🚀 Hello, Astronaut!</h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">Astro</a> blog starter template. This
-				template serves as a lightweight, minimally-styled starting point for anyone looking to build
-				a personal website, blog, or portfolio with Astro.
+			<h1>Witamy w Nadolicach Wielkich</h1>
+			<p class="intro">
+				Portal organizacji pozarządowych działających w naszej miejscowości.
 			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to <a href="https://docs.astro.build/"
-					>read the docs
-				</a> or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out <a
-					href="https://github.com/Charca/astro-blog-template"
-					>astro-blog-template
-				</a> by <a href="https://twitter.com/Charca">Maxi Ferreira</a>.
-			</p>
+
+			<section class="ngo-section">
+				<h2>Nasze Organizacje</h2>
+				<div class="ngo-tiles">
+					<a href="https://kgw.nadolicewielkie.org" class="ngo-tile" target="_blank" rel="noopener noreferrer">
+						<div class="tile-content">
+							<h3>Koło Gospodyń Wiejskich</h3>
+							<p>Koło Gospodyń Wiejskich w Nadolicach</p>
+							<span class="tile-arrow">→</span>
+						</div>
+					</a>
+					<a href="https://stowarzyszenie.nadolicewielkie.org" class="ngo-tile" target="_blank" rel="noopener noreferrer">
+						<div class="tile-content">
+							<h3>Stowarzyszenie</h3>
+							<p>Stowarzyszenie Nadolice Wielkie</p>
+							<span class="tile-arrow">→</span>
+						</div>
+					</a>
+				</div>
+			</section>
+
+			<section class="news-section">
+				<h2>Aktualności</h2>
+				{posts.length > 0 ? (
+					<ul class="news-list">
+						{posts.map((post) => (
+							<li class="news-item">
+								<a href={`/blog/${post.id}/`}>
+									<h3>{post.data.title}</h3>
+									<p class="date">
+										<FormattedDate date={post.data.pubDate} />
+									</p>
+									{post.data.description && (
+										<p class="description">{post.data.description}</p>
+									)}
+								</a>
+							</li>
+						))}
+					</ul>
+				) : (
+					<p>Brak aktualności.</p>
+				)}
+				<a href="/blog" class="view-all">Zobacz wszystkie aktualności →</a>
+			</section>
 		</main>
 		<Footer />
 	</body>
 </html>
+
+<style>
+	.intro {
+		font-size: 1.2em;
+		color: rgb(var(--gray-dark));
+		margin-bottom: 2em;
+	}
+
+	.ngo-section {
+		margin: 3em 0;
+	}
+
+	.ngo-section h2 {
+		margin-bottom: 1.5em;
+		text-align: center;
+	}
+
+	.ngo-tiles {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		gap: 2em;
+		margin-bottom: 2em;
+	}
+
+	.ngo-tile {
+		display: block;
+		background: white;
+		border-radius: 12px;
+		padding: 2em;
+		text-decoration: none;
+		color: rgb(var(--black));
+		box-shadow: var(--box-shadow);
+		transition: transform 0.3s ease, box-shadow 0.3s ease;
+		min-height: 200px;
+	}
+
+	.ngo-tile:hover {
+		transform: translateY(-5px);
+		box-shadow: 
+			0 4px 12px rgba(var(--gray), 35%), 
+			0 12px 32px rgba(var(--gray), 43%),
+			0 20px 40px rgba(var(--gray), 43%);
+	}
+
+	.tile-content {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+		position: relative;
+	}
+
+	.tile-content h3 {
+		color: var(--accent);
+		margin-bottom: 0.5em;
+		font-size: 1.8em;
+	}
+
+	.tile-content p {
+		color: rgb(var(--gray));
+		flex-grow: 1;
+		margin-bottom: 1em;
+	}
+
+	.tile-arrow {
+		font-size: 2em;
+		color: var(--accent);
+		align-self: flex-end;
+	}
+
+	.news-section {
+		margin: 4em 0;
+	}
+
+	.news-section h2 {
+		margin-bottom: 1.5em;
+	}
+
+	.news-list {
+		list-style: none;
+		padding: 0;
+		margin: 0 0 2em 0;
+	}
+
+	.news-item {
+		margin-bottom: 2em;
+		padding-bottom: 2em;
+		border-bottom: 1px solid rgb(var(--gray-light));
+	}
+
+	.news-item:last-child {
+		border-bottom: none;
+	}
+
+	.news-item a {
+		text-decoration: none;
+		color: rgb(var(--black));
+		display: block;
+	}
+
+	.news-item a:hover h3 {
+		color: var(--accent);
+	}
+
+	.news-item h3 {
+		margin-bottom: 0.5em;
+		transition: color 0.2s ease;
+	}
+
+	.news-item .date {
+		color: rgb(var(--gray));
+		font-size: 0.9em;
+		margin-bottom: 0.5em;
+	}
+
+	.news-item .description {
+		color: rgb(var(--gray-dark));
+		margin-bottom: 0;
+	}
+
+	.view-all {
+		display: inline-block;
+		color: var(--accent);
+		text-decoration: none;
+		font-weight: 700;
+		transition: color 0.2s ease;
+	}
+
+	.view-all:hover {
+		color: var(--accent-dark);
+	}
+
+	@media (max-width: 720px) {
+		.ngo-tiles {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>
