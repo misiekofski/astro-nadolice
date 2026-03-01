@@ -24,6 +24,41 @@ const posts = (await getCollection('blog')).sort(
 				Portal organizacji pozarządowych działających w naszej miejscowości.
 			</p>
 
+			<section class="document-section">
+				<div class="document-card">
+					<div class="document-icon">
+						<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+							<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+							<polyline points="14 2 14 8 20 8"></polyline>
+							<line x1="16" y1="13" x2="8" y2="13"></line>
+							<line x1="16" y1="17" x2="8" y2="17"></line>
+							<polyline points="10 9 9 9 8 9"></polyline>
+						</svg>
+					</div>
+					<div class="document-content">
+						<h3>Sołecka Strategia Rozwoju Wsi - Nadolice Wielkie</h3>
+						<p>Dokument strategiczny określający kierunki rozwoju naszej miejscowości</p>
+						<div class="document-actions">
+							<a href="/SoleckaStrategiaRozwojuWsi-NadoliceWielkie.pdf" class="btn-primary" target="_blank" rel="noopener noreferrer">
+								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+									<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+									<circle cx="12" cy="12" r="3"></circle>
+								</svg>
+								Otwórz
+							</a>
+							<a href="/SoleckaStrategiaRozwojuWsi-NadoliceWielkie.pdf" class="btn-secondary" download>
+								<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+									<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+									<polyline points="7 10 12 15 17 10"></polyline>
+									<line x1="12" y1="15" x2="12" y2="3"></line>
+								</svg>
+								Pobierz
+							</a>
+						</div>
+					</div>
+				</div>
+			</section>
+
 			<section class="ngo-section">
 				<h2>Nasze Organizacje</h2>
 				<div class="ngo-tiles">
@@ -38,6 +73,13 @@ const posts = (await getCollection('blog')).sort(
 						<div class="tile-content">
 							<h3>Stowarzyszenie</h3>
 							<p>Stowarzyszenie Nadolice Wielkie</p>
+							<span class="tile-arrow">→</span>
+						</div>
+					</a>
+					<a href="https://ksnadolice.ovh" class="ngo-tile" target="_blank" rel="noopener noreferrer">
+						<div class="tile-content">
+							<h3>KS Nadolice</h3>
+							<p>Klub Sportowy Nadolice</p>
 							<span class="tile-arrow">→</span>
 						</div>
 					</a>
@@ -77,6 +119,92 @@ const posts = (await getCollection('blog')).sort(
 		font-size: 1.2em;
 		color: rgb(var(--gray-dark));
 		margin-bottom: 2em;
+	}
+
+	.document-section {
+		margin: 2em 0 3em 0;
+	}
+
+	.document-card {
+		background: linear-gradient(135deg, var(--accent) 0%, var(--accent-dark) 100%);
+		border-radius: 16px;
+		padding: 2.5em;
+		color: white;
+		box-shadow: var(--box-shadow);
+		display: flex;
+		gap: 2em;
+		align-items: center;
+	}
+
+	.document-icon {
+		flex-shrink: 0;
+		opacity: 0.9;
+	}
+
+	.document-icon svg {
+		display: block;
+	}
+
+	.document-content {
+		flex: 1;
+	}
+
+	.document-content h3 {
+		margin: 0 0 0.5em 0;
+		font-size: 1.5em;
+		color: white;
+	}
+
+	.document-content p {
+		margin: 0 0 1.5em 0;
+		opacity: 0.95;
+		font-size: 1.05em;
+	}
+
+	.document-actions {
+		display: flex;
+		gap: 1em;
+		flex-wrap: wrap;
+	}
+
+	.btn-primary,
+	.btn-secondary {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5em;
+		padding: 0.75em 1.5em;
+		border-radius: 8px;
+		text-decoration: none;
+		font-weight: 600;
+		transition: all 0.2s ease;
+		font-size: 1em;
+	}
+
+	.btn-primary {
+		background: white;
+		color: var(--accent);
+	}
+
+	.btn-primary:hover {
+		background: rgb(var(--gray-light));
+		transform: translateY(-2px);
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+	}
+
+	.btn-secondary {
+		background: rgba(255, 255, 255, 0.2);
+		color: white;
+		border: 2px solid white;
+	}
+
+	.btn-secondary:hover {
+		background: rgba(255, 255, 255, 0.3);
+		transform: translateY(-2px);
+	}
+
+	.btn-primary svg,
+	.btn-secondary svg {
+		flex-shrink: 0;
 	}
 
 	.ngo-section {
@@ -205,6 +333,23 @@ const posts = (await getCollection('blog')).sort(
 	@media (max-width: 720px) {
 		.ngo-tiles {
 			grid-template-columns: 1fr;
+		}
+
+		.document-card {
+			flex-direction: column;
+			text-align: center;
+			padding: 2em;
+		}
+
+		.document-actions {
+			justify-content: center;
+		}
+
+		.btn-primary,
+		.btn-secondary {
+			flex: 1;
+			justify-content: center;
+			min-width: 140px;
 		}
 	}
 </style>
