@@ -1,0 +1,358 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<!doctype html>
+<html lang="pl">
+	<head>
+		<BaseHead title="Zgłoś wydarzenie - Nadolice Wielkie" description="Zgłoś wydarzenie organizowane w Nadolicach Wielkich" />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<div class="form-container">
+				<h1>Zgłoś wydarzenie</h1>
+				<p class="intro">
+					Organizujesz wydarzenie w naszej miejscowości? Wypełnij formularz poniżej, a my dodamy je do kalendarza wydarzeń.
+				</p>
+
+				<div class="info-box">
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<circle cx="12" cy="12" r="10"></circle>
+						<line x1="12" y1="16" x2="12" y2="12"></line>
+						<line x1="12" y1="8" x2="12.01" y2="8"></line>
+					</svg>
+					<div>
+						<strong>Jak to działa?</strong>
+						<p>Po wypełnieniu formularza, otrzymamy wiadomość e-mail z informacją o Twoim wydarzeniu. Zweryfikujemy dane i dodamy wydarzenie do kalendarza w ciągu 24 godzin.</p>
+					</div>
+				</div>
+
+				<form id="eventForm" class="event-form">
+					<div class="form-group">
+						<label for="title">Tytuł wydarzenia *</label>
+						<input type="text" id="title" name="title" required placeholder="np. Turniej piłki nożnej">
+					</div>
+
+					<div class="form-group">
+						<label for="description">Opis wydarzenia *</label>
+						<textarea id="description" name="description" required rows="4" placeholder="Krótki opis wydarzenia..."></textarea>
+					</div>
+
+					<div class="form-row">
+						<div class="form-group">
+							<label for="date">Data *</label>
+							<input type="date" id="date" name="date" required>
+						</div>
+
+						<div class="form-group">
+							<label for="time">Godzina *</label>
+							<input type="time" id="time" name="time" required>
+						</div>
+					</div>
+
+					<div class="form-group">
+						<label for="location">Miejsce *</label>
+						<input type="text" id="location" name="location" required placeholder="np. Świetlica wiejska">
+					</div>
+
+					<div class="form-group">
+						<label for="organizer">Organizator *</label>
+						<input type="text" id="organizer" name="organizer" required placeholder="np. Koło Gospodyń Wiejskich">
+					</div>
+
+					<div class="form-group">
+						<label for="category">Kategoria *</label>
+						<select id="category" name="category" required>
+							<option value="">Wybierz kategorię</option>
+							<option value="spotkanie">Spotkanie</option>
+							<option value="sport">Sport</option>
+							<option value="akcja">Akcja społeczna</option>
+							<option value="kultura">Kultura</option>
+							<option value="inne">Inne</option>
+						</select>
+					</div>
+
+					<div class="form-group">
+						<label for="contact">Twój e-mail kontaktowy *</label>
+						<input type="email" id="contact" name="contact" required placeholder="twoj@email.pl">
+						<small>Nie będzie publikowany, służy tylko do kontaktu w razie pytań</small>
+					</div>
+
+					<button type="submit" class="submit-button">
+						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+							<polyline points="9 11 12 14 22 4"></polyline>
+							<path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+						</svg>
+						Wyślij zgłoszenie
+					</button>
+				</form>
+
+				<div class="alternative-methods">
+					<h2>Alternatywne sposoby zgłaszania</h2>
+					<div class="methods-grid">
+						<div class="method-card">
+							<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+								<path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+								<polyline points="22,6 12,13 2,6"></polyline>
+							</svg>
+							<h3>E-mail</h3>
+							<p>Wyślij informację o wydarzeniu na adres:</p>
+							<a href="mailto:michal@ksnadolice.ovh">michal@ksnadolice.ovh</a>
+						</div>
+
+						<div class="method-card">
+							<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+								<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+								<polyline points="14 2 14 8 20 8"></polyline>
+								<line x1="16" y1="13" x2="8" y2="13"></line>
+								<line x1="16" y1="17" x2="8" y2="17"></line>
+								<polyline points="10 9 9 9 8 9"></polyline>
+							</svg>
+							<h3>Edycja ręczna</h3>
+							<p>Jeśli masz dostęp do repozytorium, możesz edytować plik:</p>
+							<code>src/data/events.json</code>
+						</div>
+					</div>
+				</div>
+			</div>
+		</main>
+		<Footer />
+
+		<script>
+			const form = document.getElementById('eventForm') as HTMLFormElement;
+			
+			form.addEventListener('submit', (e) => {
+				e.preventDefault();
+				
+				const formData = new FormData(form);
+				const data = Object.fromEntries(formData.entries());
+				
+				const subject = `Nowe wydarzenie: ${data.title}`;
+				const body = `
+Zgłoszenie nowego wydarzenia do kalendarza:
+
+Tytuł: ${data.title}
+Opis: ${data.description}
+Data: ${data.date}
+Godzina: ${data.time}
+Miejsce: ${data.location}
+Organizator: ${data.organizer}
+Kategoria: ${data.category}
+Kontakt: ${data.contact}
+
+---
+Zgłoszono przez formularz na stronie nadolicewielkie.org
+				`.trim();
+				
+				const mailtoLink = `mailto:michal@ksnadolice.ovh?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+				window.location.href = mailtoLink;
+				
+				setTimeout(() => {
+					alert('Otworzyliśmy Twojego klienta poczty. Jeśli nie otworzyło się okno e-mail, możesz wysłać informacje ręcznie na adres: michal@ksnadolice.ovh');
+				}, 500);
+			});
+		</script>
+	</body>
+</html>
+
+<style>
+	.form-container {
+		max-width: 800px;
+		margin: 0 auto;
+	}
+
+	.intro {
+		font-size: 1.1em;
+		color: rgb(var(--gray-dark));
+		margin-bottom: 2em;
+		line-height: 1.6;
+	}
+
+	.info-box {
+		background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+		border-left: 4px solid var(--accent);
+		border-radius: 8px;
+		padding: 1.5em;
+		margin-bottom: 2em;
+		display: flex;
+		gap: 1em;
+	}
+
+	.info-box svg {
+		flex-shrink: 0;
+		color: var(--accent);
+	}
+
+	.info-box strong {
+		display: block;
+		margin-bottom: 0.5em;
+		color: rgb(var(--black));
+	}
+
+	.info-box p {
+		margin: 0;
+		color: rgb(var(--gray-dark));
+		line-height: 1.5;
+	}
+
+	.event-form {
+		background: white;
+		border-radius: 12px;
+		padding: 2em;
+		box-shadow: var(--box-shadow);
+		margin-bottom: 3em;
+	}
+
+	.form-group {
+		margin-bottom: 1.5em;
+	}
+
+	.form-row {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 1.5em;
+	}
+
+	label {
+		display: block;
+		margin-bottom: 0.5em;
+		color: rgb(var(--black));
+		font-weight: 600;
+	}
+
+	input[type="text"],
+	input[type="email"],
+	input[type="date"],
+	input[type="time"],
+	textarea,
+	select {
+		width: 100%;
+		padding: 0.75em;
+		border: 2px solid rgb(var(--gray-light));
+		border-radius: 8px;
+		font-size: 1em;
+		font-family: inherit;
+		transition: border-color 0.2s ease;
+	}
+
+	input:focus,
+	textarea:focus,
+	select:focus {
+		outline: none;
+		border-color: var(--accent);
+	}
+
+	textarea {
+		resize: vertical;
+		min-height: 100px;
+	}
+
+	small {
+		display: block;
+		margin-top: 0.5em;
+		color: rgb(var(--gray));
+		font-size: 0.9em;
+	}
+
+	.submit-button {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5em;
+		padding: 1em 2.5em;
+		background: var(--accent);
+		color: white;
+		border: none;
+		border-radius: 8px;
+		font-size: 1.1em;
+		font-weight: 600;
+		cursor: pointer;
+		transition: all 0.2s ease;
+		font-family: inherit;
+	}
+
+	.submit-button:hover {
+		background: var(--accent-dark);
+		transform: translateY(-2px);
+		box-shadow: 0 4px 12px rgba(var(--accent), 0.3);
+	}
+
+	.submit-button svg {
+		flex-shrink: 0;
+	}
+
+	.alternative-methods {
+		margin-top: 4em;
+	}
+
+	.alternative-methods h2 {
+		margin-bottom: 1.5em;
+		text-align: center;
+	}
+
+	.methods-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		gap: 2em;
+	}
+
+	.method-card {
+		background: white;
+		border-radius: 12px;
+		padding: 2em;
+		box-shadow: var(--box-shadow);
+		text-align: center;
+	}
+
+	.method-card svg {
+		color: var(--accent);
+		margin-bottom: 1em;
+	}
+
+	.method-card h3 {
+		margin: 0 0 0.5em 0;
+		color: rgb(var(--black));
+	}
+
+	.method-card p {
+		color: rgb(var(--gray-dark));
+		margin: 0 0 1em 0;
+	}
+
+	.method-card a {
+		color: var(--accent);
+		text-decoration: none;
+		font-weight: 600;
+		word-break: break-all;
+	}
+
+	.method-card a:hover {
+		text-decoration: underline;
+	}
+
+	.method-card code {
+		display: inline-block;
+		background: rgb(var(--gray-light));
+		padding: 0.5em 1em;
+		border-radius: 6px;
+		font-family: 'Courier New', monospace;
+		font-size: 0.9em;
+		color: rgb(var(--black));
+	}
+
+	@media (max-width: 720px) {
+		.form-row {
+			grid-template-columns: 1fr;
+		}
+
+		.event-form {
+			padding: 1.5em;
+		}
+
+		.methods-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

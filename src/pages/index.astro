@@ -5,10 +5,17 @@ import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import { getCollection } from 'astro:content';
 import FormattedDate from '../components/FormattedDate.astro';
+import EventCard from '../components/EventCard.astro';
+import eventsData from '../data/events.json';
 
 const posts = (await getCollection('blog')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 ).slice(0, 3);
+
+const upcomingEvents = eventsData
+	.filter(event => new Date(event.date) >= new Date())
+	.sort((a, b) => new Date(a.date).valueOf() - new Date(b.date).valueOf())
+	.slice(0, 4);
 ---
 
 <!doctype html>
@@ -82,6 +89,40 @@ const posts = (await getCollection('blog')).sort(
 							<p>Osiedle Kamieni Szlachetnych</p>
 							<span class="tile-arrow">→</span>
 						</div>
+					</a>
+				</div>
+			</section>
+
+			<section class="events-section">
+				<div class="section-header">
+					<h2>Kalendarz Wydarzeń</h2>
+					<a href="/wydarzenia" class="view-all-link">Zobacz wszystkie →</a>
+				</div>
+				{upcomingEvents.length > 0 ? (
+					<div class="events-grid">
+						{upcomingEvents.map((event) => (
+							<EventCard
+								title={event.title}
+								description={event.description}
+								date={event.date}
+								time={event.time}
+								location={event.location}
+								organizer={event.organizer}
+								category={event.category}
+							/>
+						))}
+					</div>
+				) : (
+					<p class="no-events">Brak nadchodzących wydarzeń.</p>
+				)}
+				<div class="event-submit-cta">
+					<p>Organizujesz wydarzenie w naszej miejscowości?</p>
+					<a href="/zglos-wydarzenie" class="cta-button">
+						<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+							<line x1="12" y1="5" x2="12" y2="19"></line>
+							<line x1="5" y1="12" x2="19" y2="12"></line>
+						</svg>
+						Zgłoś wydarzenie
 					</a>
 				</div>
 			</section>
@@ -204,6 +245,87 @@ const posts = (await getCollection('blog')).sort(
 
 	.btn-primary svg,
 	.btn-secondary svg {
+		flex-shrink: 0;
+	}
+
+	.events-section {
+		margin: 4em 0;
+	}
+
+	.section-header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 2em;
+		flex-wrap: wrap;
+		gap: 1em;
+	}
+
+	.section-header h2 {
+		margin: 0;
+	}
+
+	.view-all-link {
+		color: var(--accent);
+		text-decoration: none;
+		font-weight: 600;
+		transition: color 0.2s ease;
+		font-size: 1em;
+	}
+
+	.view-all-link:hover {
+		color: var(--accent-dark);
+	}
+
+	.events-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+		gap: 1.5em;
+		margin-bottom: 2em;
+	}
+
+	.no-events {
+		text-align: center;
+		color: rgb(var(--gray));
+		padding: 3em 0;
+		font-size: 1.1em;
+	}
+
+	.event-submit-cta {
+		background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%);
+		border-radius: 12px;
+		padding: 2em;
+		text-align: center;
+		margin-top: 2em;
+	}
+
+	.event-submit-cta p {
+		margin: 0 0 1em 0;
+		color: rgb(var(--gray-dark));
+		font-size: 1.1em;
+	}
+
+	.cta-button {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.5em;
+		padding: 0.9em 2em;
+		background: var(--accent);
+		color: white;
+		border-radius: 8px;
+		text-decoration: none;
+		font-weight: 600;
+		transition: all 0.2s ease;
+		font-size: 1em;
+	}
+
+	.cta-button:hover {
+		background: var(--accent-dark);
+		transform: translateY(-2px);
+		box-shadow: 0 4px 12px rgba(var(--accent), 0.3);
+	}
+
+	.cta-button svg {
 		flex-shrink: 0;
 	}
 
@@ -350,6 +472,15 @@ const posts = (await getCollection('blog')).sort(
 			flex: 1;
 			justify-content: center;
 			min-width: 140px;
+		}
+
+		.events-grid {
+			grid-template-columns: 1fr;
+		}
+
+		.section-header {
+			flex-direction: column;
+			align-items: flex-start;
 		}
 	}
 </style>
