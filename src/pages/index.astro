@@ -12,8 +12,14 @@ const posts = (await getCollection('blog')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 ).slice(0, 3);
 
+const now = new Date();
+const thirtyDaysFromNow = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000);
+
 const upcomingEvents = eventsData
-	.filter(event => new Date(event.date) >= new Date())
+	.filter(event => {
+		const eventDate = new Date(event.date);
+		return eventDate >= now && eventDate <= thirtyDaysFromNow;
+	})
 	.sort((a, b) => new Date(a.date).valueOf() - new Date(b.date).valueOf())
 	.slice(0, 4);
 ---
@@ -66,34 +72,7 @@ const upcomingEvents = eventsData
 				</div>
 			</section>
 
-			<section class="ngo-section">
-				<h2>Nasze Organizacje</h2>
-				<div class="ngo-tiles">
-					<a href="https://kgw.nadolicewielkie.org" class="ngo-tile" target="_blank" rel="noopener noreferrer">
-						<div class="tile-content">
-							<h3>Koło Gospodyń Wiejskich</h3>
-							<p>Koło Gospodyń Wiejskich w Nadolicach</p>
-							<span class="tile-arrow">→</span>
-						</div>
-					</a>
-					<a href="https://stowarzyszenie.nadolicewielkie.org" class="ngo-tile" target="_blank" rel="noopener noreferrer">
-						<div class="tile-content">
-							<h3>Stowarzyszenie</h3>
-							<p>Stowarzyszenie Nadolice Wielkie</p>
-							<span class="tile-arrow">→</span>
-						</div>
-					</a>
-					<a href="https://ksnadolice.ovh" class="ngo-tile" target="_blank" rel="noopener noreferrer">
-						<div class="tile-content">
-							<h3>KS Nadolice</h3>
-							<p>Osiedle Kamieni Szlachetnych</p>
-							<span class="tile-arrow">→</span>
-						</div>
-					</a>
-				</div>
-			</section>
-
-			<section class="events-section">
+						<section class="events-section">
 				<div class="section-header">
 					<h2>Kalendarz Wydarzeń</h2>
 					<a href="/wydarzenia" class="view-all-link">Zobacz wszystkie →</a>
@@ -123,6 +102,33 @@ const upcomingEvents = eventsData
 							<line x1="5" y1="12" x2="19" y2="12"></line>
 						</svg>
 						Zgłoś wydarzenie
+					</a>
+				</div>
+			</section>
+
+			<section class="ngo-section">
+				<h2>Nasze Organizacje</h2>
+				<div class="ngo-tiles">
+					<a href="https://kgw.nadolicewielkie.org" class="ngo-tile" target="_blank" rel="noopener noreferrer">
+						<div class="tile-content">
+							<h3>Koło Gospodyń Wiejskich</h3>
+							<p>Koło Gospodyń Wiejskich w Nadolicach</p>
+							<span class="tile-arrow">→</span>
+						</div>
+					</a>
+					<a href="https://stowarzyszenie.nadolicewielkie.org" class="ngo-tile" target="_blank" rel="noopener noreferrer">
+						<div class="tile-content">
+							<h3>Stowarzyszenie</h3>
+							<p>Stowarzyszenie Nadolice Wielkie</p>
+							<span class="tile-arrow">→</span>
+						</div>
+					</a>
+					<a href="https://ksnadolice.ovh" class="ngo-tile" target="_blank" rel="noopener noreferrer">
+						<div class="tile-content">
+							<h3>KS Nadolice</h3>
+							<p>Osiedle Kamieni Szlachetnych</p>
+							<span class="tile-arrow">→</span>
+						</div>
 					</a>
 				</div>
 			</section>

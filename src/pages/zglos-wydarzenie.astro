@@ -30,42 +30,56 @@ import Footer from '../components/Footer.astro';
 					</div>
 				</div>
 
-				<form id="eventForm" class="event-form">
+				<div id="successMessage" class="success-message" style="display: none;">
+					<svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+						<polyline points="22 4 12 14.01 9 11.01"></polyline>
+					</svg>
+					<h3>Dziękujemy za zgłoszenie!</h3>
+					<p>Twoje wydarzenie zostało przesłane. Dodamy je do kalendarza w ciągu 24 godzin.</p>
+					<button onclick="location.reload()" class="back-button">Zgłoś kolejne wydarzenie</button>
+				</div>
+
+				<form id="eventForm" class="event-form" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+					<input type="hidden" name="_subject" value="Nowe wydarzenie do kalendarza - Nadolice Wielkie">
+					<input type="hidden" name="_template" value="table">
+					<input type="hidden" name="_replyto" id="replyto">
+
 					<div class="form-group">
 						<label for="title">Tytuł wydarzenia *</label>
-						<input type="text" id="title" name="title" required placeholder="np. Turniej piłki nożnej">
+						<input type="text" id="title" name="Tytuł wydarzenia" required placeholder="np. Turniej piłki nożnej">
 					</div>
 
 					<div class="form-group">
 						<label for="description">Opis wydarzenia *</label>
-						<textarea id="description" name="description" required rows="4" placeholder="Krótki opis wydarzenia..."></textarea>
+						<textarea id="description" name="Opis" required rows="4" placeholder="Krótki opis wydarzenia..."></textarea>
 					</div>
 
 					<div class="form-row">
 						<div class="form-group">
 							<label for="date">Data *</label>
-							<input type="date" id="date" name="date" required>
+							<input type="date" id="date" name="Data" required>
 						</div>
 
 						<div class="form-group">
 							<label for="time">Godzina *</label>
-							<input type="time" id="time" name="time" required>
+							<input type="time" id="time" name="Godzina" required>
 						</div>
 					</div>
 
 					<div class="form-group">
 						<label for="location">Miejsce *</label>
-						<input type="text" id="location" name="location" required placeholder="np. Świetlica wiejska">
+						<input type="text" id="location" name="Miejsce" required placeholder="np. Świetlica wiejska">
 					</div>
 
 					<div class="form-group">
 						<label for="organizer">Organizator *</label>
-						<input type="text" id="organizer" name="organizer" required placeholder="np. Koło Gospodyń Wiejskich">
+						<input type="text" id="organizer" name="Organizator" required placeholder="np. Koło Gospodyń Wiejskich">
 					</div>
 
 					<div class="form-group">
 						<label for="category">Kategoria *</label>
-						<select id="category" name="category" required>
+						<select id="category" name="Kategoria" required>
 							<option value="">Wybierz kategorię</option>
 							<option value="spotkanie">Spotkanie</option>
 							<option value="sport">Sport</option>
@@ -77,7 +91,7 @@ import Footer from '../components/Footer.astro';
 
 					<div class="form-group">
 						<label for="contact">Twój e-mail kontaktowy *</label>
-						<input type="email" id="contact" name="contact" required placeholder="twoj@email.pl">
+						<input type="email" id="contact" name="Email kontaktowy" required placeholder="twoj@email.pl">
 						<small>Nie będzie publikowany, służy tylko do kontaktu w razie pytań</small>
 					</div>
 
@@ -123,36 +137,49 @@ import Footer from '../components/Footer.astro';
 
 		<script>
 			const form = document.getElementById('eventForm') as HTMLFormElement;
+			const successMessage = document.getElementById('successMessage') as HTMLElement;
+			const contactInput = document.getElementById('contact') as HTMLInputElement;
+			const replytoInput = document.getElementById('replyto') as HTMLInputElement;
 			
-			form.addEventListener('submit', (e) => {
+			// Sync contact email to _replyto field for Formspree
+			contactInput?.addEventListener('input', () => {
+				if (replytoInput) {
+					replytoInput.value = contactInput.value;
+				}
+			});
+			
+			form?.addEventListener('submit', async (e) => {
 				e.preventDefault();
 				
-				const formData = new FormData(form);
-				const data = Object.fromEntries(formData.entries());
+				const submitButton = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+				const originalText = submitButton.innerHTML;
 				
-				const subject = `Nowe wydarzenie: ${data.title}`;
-				const body = `
-Zgłoszenie nowego wydarzenia do kalendarza:
-
-Tytuł: ${data.title}
-Opis: ${data.description}
-Data: ${data.date}
-Godzina: ${data.time}
-Miejsce: ${data.location}
-Organizator: ${data.organizer}
-Kategoria: ${data.category}
-Kontakt: ${data.contact}
-
----
-Zgłoszono przez formularz na stronie nadolicewielkie.org
-				`.trim();
+				// Show loading state
+				submitButton.disabled = true;
+				submitButton.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="spinning"><line x1="12" y1="2" x2="12" y2="6"></line><line x1="12" y1="18" x2="12" y2="22"></line><line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line><line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line><line x1="2" y1="12" x2="6" y2="12"></line><line x1="18" y1="12" x2="22" y2="12"></line><line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line><line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line></svg> Wysyłanie...';
 				
-				const mailtoLink = `mailto:michal@ksnadolice.ovh?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-				window.location.href = mailtoLink;
-				
-				setTimeout(() => {
-					alert('Otworzyliśmy Twojego klienta poczty. Jeśli nie otworzyło się okno e-mail, możesz wysłać informacje ręcznie na adres: michal@ksnadolice.ovh');
-				}, 500);
+				try {
+					const formData = new FormData(form);
+					const response = await fetch(form.action, {
+						method: 'POST',
+						body: formData,
+						headers: {
+							'Accept': 'application/json'
+						}
+					});
+					
+					if (response.ok) {
+						// Show success message
+						form.style.display = 'none';
+						successMessage.style.display = 'block';
+					} else {
+						throw new Error('Błąd wysyłania formularza');
+					}
+				} catch (error) {
+					alert('Wystąpił błąd podczas wysyłania formularza. Spróbuj ponownie lub wyślij e-mail bezpośrednio na adres: michal@ksnadolice.ovh');
+					submitButton.disabled = false;
+					submitButton.innerHTML = originalText;
+				}
 			});
 		</script>
 	</body>
@@ -198,12 +225,63 @@ Zgłoszono przez formularz na stronie nadolicewielkie.org
 		line-height: 1.5;
 	}
 
+	.success-message {
+		background: white;
+		border-radius: 12px;
+		padding: 3em 2em;
+		box-shadow: var(--box-shadow);
+		margin-bottom: 3em;
+		text-align: center;
+	}
+
+	.success-message svg {
+		color: #10b981;
+		margin-bottom: 1em;
+	}
+
+	.success-message h3 {
+		color: rgb(var(--black));
+		margin: 0 0 0.5em 0;
+	}
+
+	.success-message p {
+		color: rgb(var(--gray-dark));
+		margin: 0 0 1.5em 0;
+	}
+
+	.back-button {
+		display: inline-block;
+		padding: 0.75em 1.5em;
+		background: var(--accent);
+		color: white;
+		border: none;
+		border-radius: 8px;
+		font-size: 1em;
+		font-weight: 600;
+		cursor: pointer;
+		transition: all 0.2s ease;
+		font-family: inherit;
+	}
+
+	.back-button:hover {
+		background: var(--accent-dark);
+	}
+
 	.event-form {
 		background: white;
 		border-radius: 12px;
 		padding: 2em;
 		box-shadow: var(--box-shadow);
 		margin-bottom: 3em;
+	}
+
+	@keyframes spin {
+		from { transform: rotate(0deg); }
+		to { transform: rotate(360deg); }
+	}
+
+	.spinning {
+		animation: spin 1s linear infinite;
 	}
 
 	.form-group {

@@ -37,11 +37,13 @@ Wydarzenia są przechowywane w pliku: `src/data/events.json`
 
 Użytkownicy mogą zgłaszać wydarzenia przez formularz na stronie:
 - URL: `/zglos-wydarzenie`
-- Formularz generuje wiadomość e-mail z danymi wydarzenia
+- Formularz wysyła dane przez usługę Formspree
 - E-mail jest wysyłany na adres: `michal@ksnadolice.ovh`
+- **Działa na wszystkich urządzeniach, w tym telefonach bez klienta poczty**
 
-**Uwaga:** Musisz skonfigurować adres e-mail `michal@ksnadolice.ovh` lub zmienić adres w plikach:
-- `src/pages/zglos-wydarzenie.astro` (linia 156)
+**Konfiguracja wymagana:**
+Musisz skonfigurować konto Formspree i zaktualizować Form ID w pliku `src/pages/zglos-wydarzenie.astro`.
+Szczegółowa instrukcja znajduje się w pliku `FORMSPREE_SETUP.md`.
 
 ### 2. Edycja ręczna (dla administratorów)
 
@@ -97,10 +99,11 @@ Administrator następnie ręcznie dodaje wydarzenie do pliku JSON.
 
 ## Automatyczne funkcje
 
-### Sortowanie
+### Sortowanie i filtrowanie
 - Wydarzenia są automatycznie sortowane według daty
-- Na stronie głównej wyświetlane są tylko 4 najbliższe wydarzenia
+- **Na stronie głównej wyświetlane są tylko wydarzenia z najbliższych 30 dni** (maksymalnie 4)
 - Na stronie `/wydarzenia` wszystkie wydarzenia są podzielone na nadchodzące i minione
+- Wydarzenia starsze niż 30 dni nie będą widoczne na stronie głównej, ale będą dostępne na `/wydarzenia`
 
 ### Filtrowanie
 - Wydarzenia przeszłe są automatycznie przenoszone do sekcji "Minione wydarzenia"
