@@ -4,11 +4,16 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import EventCard from '../components/EventCard.astro';
 import eventsData from '../data/events.json';
+import { expandEventsInRange } from '../utils/events';
 
-const allEvents = eventsData.sort((a, b) => new Date(a.date).valueOf() - new Date(b.date).valueOf());
+const now = new Date();
+const pastStart = new Date(now.getTime() - 180 * 24 * 60 * 60 * 1000);
+const futureEnd = new Date(now.getTime() + 365 * 24 * 60 * 60 * 1000);
 
-const upcomingEvents = allEvents.filter(event => new Date(event.date) >= new Date());
-const pastEvents = allEvents.filter(event => new Date(event.date) < new Date()).reverse();
+const expanded = expandEventsInRange(eventsData, pastStart, futureEnd);
+
+const upcomingEvents = expanded.filter((event) => new Date(event.date) >= now);
+const pastEvents = expanded.filter((event) => new Date(event.date) < now).reverse();
 ---
 
 <!doctype html>

@@ -78,39 +78,6 @@ Jeśli Formspree nie spełnia Twoich potrzeb, możesz rozważyć:
 **Implementacja:**
 Zamień przycisk "Zgłoś wydarzenie" na link do Google Forms.
 
-### 2. Netlify Forms (jeśli hostujesz na Netlify)
-- 100 zgłoszeń miesięcznie za darmo
-- Automatyczna integracja
-- Panel administracyjny w Netlify
-
-**Implementacja:**
-1. Dodaj atrybut `netlify` do formularza:
-   ```html
-   <form name="wydarzenia" netlify>
-   ```
-2. Usuń `action` i JavaScript
-3. Netlify automatycznie obsłuży formularz
-
-### 3. EmailJS
-- 200 e-maili miesięcznie za darmo
-- Wysyła e-maile bezpośrednio z przeglądarki
-- Wymaga konfiguracji szablonu e-mail
-
-## Odbieranie zgłoszeń
-
-Po skonfigurowaniu Formspree, zgłoszenia będą przychodzić na adres `michal@ksnadolice.ovh` w następującym formacie:
-
-```
-Tytuł wydarzenia: Turniej piłki nożnej
-Opis: Coroczny turniej dla drużyn amatorskich
-Data: 2026-04-20
-Godzina: 10:00
-Miejsce: Boisko sportowe
-Organizator: KS Nadolice
-Kategoria: sport
-Email kontaktowy: jan@example.com
-```
-
 ## Dodawanie wydarzeń do kalendarza
 
 Po otrzymaniu zgłoszenia:

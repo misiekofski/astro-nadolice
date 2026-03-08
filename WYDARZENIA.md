@@ -19,9 +19,78 @@ Wydarzenia są przechowywane w pliku: `src/data/events.json`
   "time": "17:00",
   "location": "Miejsce wydarzenia",
   "organizer": "Nazwa organizatora",
-  "category": "spotkanie"
+  "category": "spotkanie",
+  "recurrence": {
+    "type": "monthly",
+    "intervalMonths": 1,
+    "dayOfMonth": 15,
+    "until": "2026-12-31"
+  }
 }
 ```
+
+Pole `recurrence` jest opcjonalne. Jeśli nie istnieje, wydarzenie jest jednorazowe.
+
+### Wydarzenia cykliczne (recurrence)
+
+Wydarzenia cykliczne są przechowywane jako jeden wpis w `events.json`, a strona generuje z niego konkretne wystąpienia w zakresie dat:
+- Strona główna: tylko najbliższe 30 dni
+- Strona `/wydarzenia`: ostatnie 180 dni + następne 365 dni
+
+#### 1) Co miesiąc (monthly)
+
+```json
+{
+  "id": "kgw-spotkanie",
+  "title": "Spotkanie KGW",
+  "description": "Stałe spotkanie miesięczne",
+  "date": "2026-03-01",
+  "time": "18:00",
+  "location": "Świetlica wiejska",
+  "organizer": "Koło Gospodyń Wiejskich",
+  "category": "spotkanie",
+  "recurrence": {
+    "type": "monthly",
+    "intervalMonths": 1,
+    "dayOfMonth": 1,
+    "until": "2026-12-31"
+  }
+}
+```
+
+Znaczenie pól:
+- `intervalMonths` (opcjonalne, domyślnie 1): co ile miesięcy występuje wydarzenie
+- `dayOfMonth` (opcjonalne): dzień miesiąca (1-31). Jeśli dzień nie istnieje w danym miesiącu (np. 31 w lutym), wystąpienie jest pomijane.
+- `until` (opcjonalne): data końca cyklu w formacie `YYYY-MM-DD`
+
+#### 2) N-ty dzień tygodnia w miesiącu (nthWeekdayOfMonth)
+
+Przykład: „w każdy 2. wtorek miesiąca”:
+
+```json
+{
+  "id": "dyzury",
+  "title": "Dyżur organizacyjny",
+  "description": "Dyżur dla mieszkańców",
+  "date": "2026-03-01",
+  "time": "19:00",
+  "location": "Świetlica",
+  "organizer": "Stowarzyszenie",
+  "category": "inne",
+  "recurrence": {
+    "type": "nthWeekdayOfMonth",
+    "weekday": 2,
+    "nth": 2,
+    "intervalMonths": 1,
+    "until": "2026-12-31"
+  }
+}
+```
+
+Znaczenie pól:
+- `weekday`: dzień tygodnia (0=niedziela, 1=poniedziałek, 2=wtorek, ..., 6=sobota)
+- `nth`: który to dzień tygodnia w miesiącu (1-5)
+- `intervalMonths` i `until` jak wyżej
 
 ### Dostępne kategorie
 

@@ -2,31 +2,11 @@
   {
     "id": "1",
     "title": "Spotkanie Koła Gospodyń Wiejskich",
-    "description": "Comiesięczne spotkanie członkiń KGW. Zapraszamy wszystkie zainteresowane panie.",
-    "date": "2026-03-15",
-    "time": "17:00",
-    "location": "Świetlica wiejska",
-    "organizer": "Koło Gospodyń Wiejskich",
+    "description": "Integracja Osiedla Kamieni Szlachetnych.",
+    "date": "2026-03-21",
+    "time": "14:00",
+    "location": "Osiedle Kamieni Szlachetnych",
+    "organizer": "Stowarzyszenie Osiedla Kamieni Szlachetnych",
     "category": "spotkanie"
-  },
-  {
-    "id": "2",
-    "title": "Dzień ziemniaka",
-    "description": "Coroczny turniej piłki nożnej dla drużyn amatorskich z okolicy.",
-    "date": "2026-04-20",
-    "time": "10:00",
-    "location": "Nadolicki Park Przypałacowy",
-    "organizer": "Stowarzyszenie Osiedla Kamieni Szlachetnych Nadolice",
-    "category": "integracja"
-  },
-  {
-    "id": "3",
-    "title": "Wiosenne porządki wsi",
-    "description": "Wspólna akcja sprzątania terenów publicznych. Zapraszamy wszystkich mieszkańców!",
-    "date": "2026-04-05",
-    "time": "09:00",
-    "location": "Zbiórka przy świetlicy",
-    "organizer": "Stowarzyszenie Nadolice Wielkie",
-    "category": "akcja"
   }
 ]

@@ -7,6 +7,7 @@ import { getCollection } from 'astro:content';
 import FormattedDate from '../components/FormattedDate.astro';
 import EventCard from '../components/EventCard.astro';
 import eventsData from '../data/events.json';
+import { expandEventsInRange } from '../utils/events';
 
 const posts = (await getCollection('blog')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
@@ -15,11 +16,7 @@ const posts = (await getCollection('blog')).sort(
 const now = new Date();
 const thirtyDaysFromNow = new Date(now.getTime() + 30 * 24 * 60 * 60 * 1000);
 
-const upcomingEvents = eventsData
-	.filter(event => {
-		const eventDate = new Date(event.date);
-		return eventDate >= now && eventDate <= thirtyDaysFromNow;
-	})
+const upcomingEvents = expandEventsInRange(eventsData, now, thirtyDaysFromNow)
 	.sort((a, b) => new Date(a.date).valueOf() - new Date(b.date).valueOf())
 	.slice(0, 4);
 ---
@@ -120,6 +117,13 @@ const upcomingEvents = eventsData
 						<div class="tile-content">
 							<h3>Stowarzyszenie</h3>
 							<p>Stowarzyszenie Nadolice Wielkie</p>
+							<span class="tile-arrow">→</span>
+						</div>
+					</a>
+					<a href="https://osmysliwskie.pl" class="ngo-tile" target="_blank" rel="noopener noreferrer">
+						<div class="tile-content">
+							<h3>Osiedle Myśliwskie</h3>
+							<p>Strona Osiedla Myśliwskiego</p>
 							<span class="tile-arrow">→</span>
 						</div>
 					</a>
