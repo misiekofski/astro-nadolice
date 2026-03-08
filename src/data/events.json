@@ -16,7 +16,7 @@
     "date": "2026-03-11",
     "time": "18:00–20:00",
     "location": "Nadolice Wielkie",
-    "organizer": "Sołectwo Nadolice Wielkie",
+    "organizer": "Świetlica Wiejska Nadolice Wielkie",
     "category": "inne"
   },
   {
@@ -26,7 +26,7 @@
     "date": "2026-03-12",
     "time": "18:00–20:00",
     "location": "Nadolice Wielkie",
-    "organizer": "Sołectwo Nadolice Wielkie",
+    "organizer": "Świetlica Wiejska Nadolice Wielkie",
     "category": "inne"
   },
   {
@@ -35,8 +35,18 @@
     "description": "Proszę o przyniesienie decyzji o wielkości rat podatku",
     "date": "2026-03-13",
     "time": "18:00–20:00",
-    "location": "Nadolice Wielkie",
+    "location": "Świetlica Wiejska Nadolice Wielkie",
     "organizer": "Sołectwo Nadolice Wielkie",
     "category": "inne"
+  },
+    {
+    "id": "4",
+    "title": "Warsztaty tworzenia świec",
+    "description": "Warsztaty tworzenia naturalnych świec z wykorzystaniem ziół. Koszt: 30 zł od osoby",
+    "date": "2026-03-25",
+    "time": "19:00–21:00",
+    "location": "Świetlica Wiejska Nadolice Wielkie",
+    "organizer": "KGW",
+    "category": "warsztaty"
   }
 ]
