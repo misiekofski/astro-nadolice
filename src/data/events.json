@@ -8,5 +8,35 @@
     "location": "Osiedle Kamieni Szlachetnych",
     "organizer": "Stowarzyszenie Osiedla Kamieni Szlachetnych",
     "category": "spotkanie"
+  },
+  {
+    "id": "2",
+    "title": "Zbiórka podatków od nieruchomości, podatku rolnego i składki na spółki wodne",
+    "description": "Proszę o przyniesienie decyzji o wielkości rat podatku",
+    "date": "2026-03-11",
+    "time": "18:00–20:00",
+    "location": "Nadolice Wielkie",
+    "organizer": "Sołectwo Nadolice Wielkie",
+    "category": "inne"
+  },
+  {
+    "id": "3",
+    "title": "Zbiórka podatków od nieruchomości, podatku rolnego i składki na spółki wodne",
+    "description": "Proszę o przyniesienie decyzji o wielkości rat podatku",
+    "date": "2026-03-12",
+    "time": "18:00–20:00",
+    "location": "Nadolice Wielkie",
+    "organizer": "Sołectwo Nadolice Wielkie",
+    "category": "inne"
+  },
+  {
+    "id": "4",
+    "title": "Zbiórka podatków od nieruchomości, podatku rolnego i składki na spółki wodne",
+    "description": "Proszę o przyniesienie decyzji o wielkości rat podatku",
+    "date": "2026-03-13",
+    "time": "18:00–20:00",
+    "location": "Nadolice Wielkie",
+    "organizer": "Sołectwo Nadolice Wielkie",
+    "category": "inne"
   }
 ]
