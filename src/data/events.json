@@ -39,7 +39,7 @@
     "organizer": "Sołectwo Nadolice Wielkie",
     "category": "inne"
   },
-    {
+  {
     "id": "4",
     "title": "Warsztaty tworzenia świec",
     "description": "Warsztaty tworzenia naturalnych świec z wykorzystaniem ziół. Koszt: 30 zł od osoby",
@@ -48,5 +48,15 @@
     "location": "Świetlica Wiejska Nadolice Wielkie",
     "organizer": "KGW",
     "category": "warsztaty"
+  },
+  {
+    "id": "5",
+    "title": "Ognisko integracyjne",
+    "description": "Ognisko integracyjne dla mieszkańców sołectwa.",
+    "date": "2026-03-21",
+    "time": "1418:00",
+    "location": "Park Nadolicki",
+    "organizer": "KGW",
+    "category": "spotkanie"
   }
 ]
