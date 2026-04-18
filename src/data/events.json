@@ -1,62 +1,22 @@
 [
   {
     "id": "1",
-    "title": "Integracja Osiedla Kamieni Szlachetnych",
-    "description": "Integracja mieszkańców Osiedla Kamieni Szlachetnych i rozmowy o wspólnych częściach osiedla.",
-    "date": "2026-03-21",
-    "time": "14:00",
-    "location": "Osiedle Kamieni Szlachetnych",
-    "organizer": "Stowarzyszenie Osiedla Kamieni Szlachetnych",
+    "title": "Sprzątanie świata",
+    "description": "Sprzątanie okolicy i ognisko w parku po sprzątaniu.",
+    "date": "2026-04-18",
+    "time": "10:00",
+    "location": "Parking przed kościołem",
+    "organizer": "Sołectwo Nadolice Wielkie",
     "category": "spotkanie"
   },
   {
     "id": "2",
-    "title": "Zbiórka podatków od nieruchomości, podatku rolnego i składki na spółki wodne",
-    "description": "Proszę o przyniesienie decyzji o wielkości rat podatku",
-    "date": "2026-03-11",
-    "time": "18:00–20:00",
+    "title": "Rozpoczęcie wiosny z Piast Nadolice",
+    "description": "Piknik i integracja",
+    "date": "2026-04-18",
+    "time": "16:00–20:00",
     "location": "Nadolice Wielkie",
-    "organizer": "Świetlica Wiejska Nadolice Wielkie",
+    "organizer": "Boisko Piast Nadolice",
     "category": "inne"
-  },
-  {
-    "id": "3",
-    "title": "Zbiórka podatków od nieruchomości, podatku rolnego i składki na spółki wodne",
-    "description": "Proszę o przyniesienie decyzji o wielkości rat podatku",
-    "date": "2026-03-12",
-    "time": "18:00–20:00",
-    "location": "Nadolice Wielkie",
-    "organizer": "Świetlica Wiejska Nadolice Wielkie",
-    "category": "inne"
-  },
-  {
-    "id": "4",
-    "title": "Zbiórka podatków od nieruchomości, podatku rolnego i składki na spółki wodne",
-    "description": "Proszę o przyniesienie decyzji o wielkości rat podatku",
-    "date": "2026-03-13",
-    "time": "18:00–20:00",
-    "location": "Świetlica Wiejska Nadolice Wielkie",
-    "organizer": "Sołectwo Nadolice Wielkie",
-    "category": "inne"
-  },
-  {
-    "id": "4",
-    "title": "Warsztaty tworzenia świec",
-    "description": "Warsztaty tworzenia naturalnych świec z wykorzystaniem ziół. Koszt: 30 zł od osoby",
-    "date": "2026-03-25",
-    "time": "19:00–21:00",
-    "location": "Świetlica Wiejska Nadolice Wielkie",
-    "organizer": "KGW",
-    "category": "warsztaty"
-  },
-  {
-    "id": "5",
-    "title": "Ognisko integracyjne",
-    "description": "Ognisko integracyjne dla mieszkańców sołectwa.",
-    "date": "2026-03-21",
-    "time": "1418:00",
-    "location": "Park Nadolicki",
-    "organizer": "KGW",
-    "category": "spotkanie"
   }
 ]
